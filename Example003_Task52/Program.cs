@@ -1,41 +1,52 @@
 ﻿/*Задача 52. 
-Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце. */
+Задайте двумерный массив из целых чисел. 
+Найдите среднее арифметическое элементов в каждом столбце. */
 
+Console.WriteLine("Введите количество строк: ");
+int n = Convert.ToInt32(Console.ReadLine());
 
-int n = 12;
-int min = -9;
-int max = 9;
+Console.WriteLine("Введите количество столбцов: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine();
 
-int[] CreateArray(int n, int min, int max)
+int [,] matrix = new int [m,n];
+FillArray(matrix);
+
+void FillArray(int[,] matr)
 {
-    int[] array1 = new int[n];
-    for (int i = 0; i < n; i++)
-    {
-        array1[i] = new Random().Next(min, max +1);
-    }
-    return array1;
+    for (int i = 0; i < matr.GetLength(0); i++)
+        {        
+            for (int j = 0; j < matr.GetLength(1); j++)
+            {
+                matr [i,j] = new Random().Next(1, 100);
+            }   
+        }
 }
 
-void PrintArray(int[] array2)
+void PrintArray(int[,] matr)
 {
-    for (int i = 0; i < array2.Length; i++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-        Console.Write($"{array2[i]} ");
+        for (int j = 0; j < matr.GetLength(1); j++)
+        {
+            Console.Write($"{matr[i, j] } \t");
+        }   
+        Console.WriteLine(""); 
     }
-    Console.WriteLine();
-}
-PrintArray(CreateArray(n, min, max));
-
-int[] Summ(int[] array1)
-{
-    int[] sum = new int[2];
-    for (int i = 0; i < array1.Length; i++)
-    {
-        if (array1[i] < 0) sum[0] += array1[i];
-        
-        else sum[1] += array1[i];
-    }
-    return sum;
 }
 
-PrintArray(Summ(CreateArray(n, min, max)));
+for (int j = 0; j < matrix.GetLength(1); j++)
+{
+    double avarage = 0;
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        avarage = (avarage + matrix[i, j]);
+    }
+    avarage = avarage / n;
+    
+    Console.Write($"{avarage} \t");
+
+}
+Console.WriteLine();
+
+PrintArray(matrix);
